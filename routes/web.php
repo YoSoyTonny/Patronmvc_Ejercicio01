@@ -20,3 +20,4 @@ Route::get('/noticias/{id}', 'NoticiaController@show')->name('noticias.show');
 
 
 
+Route::get('/admin', 'AdminController@dashboard')->name('admin.dashboard');
