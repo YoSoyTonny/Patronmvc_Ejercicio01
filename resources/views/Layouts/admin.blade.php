@@ -170,7 +170,10 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{Auth::user()->name}}</a> 
+          <a href="{{route('logout')}}" id="linkLogout" style="font-size: 12px">Cerrar sesión</a>
+          <form id="formLogout" action="{{route('logout')}}" method="post">@csrf</form>
+          
         </div>
       </div>
 
@@ -294,5 +297,15 @@
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<script>
+  function doClickLinkLogout(e) {
+   e.preventDefault();
+   $("#formLogout").submit();
+            }
+
+          $(function(){
+            $("#linkLogout").click(doClickLinkLogout);
+          });
+          </script>
 </body>
 </html>
