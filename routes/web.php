@@ -12,10 +12,14 @@
 */
 
 
-Route::get('/', 'NoticiaController@index') ->name('noticias.show');
-Route::get('/noticias/{id}', 'NoticiaController@show')->name('noticias.show');
+Route::get('/', 'NoticiaController@index') ->name('front.noticias.create');
+Route::get('/noticias/{id}', 'NoticiaController@show')->name('front.noticias.show');
 
 
 
 Route::get('/admin', 'AdminController@dashboard')->name('admin.dashboard');
+
+//
+Route::resource('/admin/noticias', 'Admin\NoticiaController');
+
 Auth::routes(['register' => false]);
