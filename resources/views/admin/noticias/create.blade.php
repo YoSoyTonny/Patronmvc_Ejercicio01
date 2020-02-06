@@ -8,7 +8,9 @@
 
 @section('contenido')
 <p>Hola mundo</p>
-
+<a class="btn btn-primary btn-sm" style="margin-bottom: 10px;" 
+    href="{{route('noticias.index')}}"><i class="fas fa-arrow-left"></i>
+    Volver a la lista</a>
 <div class="container-fluid">
     <div class="row">
     <div class="col-md-12">
