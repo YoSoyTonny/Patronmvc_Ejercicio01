@@ -7,6 +7,8 @@
 @endsection
 
 @section('contenido')
+
+
 <div class="container-fluid">
     <div class="row">
     <div class="col-md-12">
@@ -47,13 +49,11 @@
                 <td>{{$noticia->titulo}}</td>
                 <td>
                 
-                <form method="POST" action="{{route('noticias.destroy', $noticia->id)}}">
-                @csrf
-                @method('DELETE')
+               
+              
                 <a href="{{route('noticias.show', $noticia->id)}}" class="btn btn-primary"><i class="fas fa-eye"></i> </a>
                 <a href="{{route('noticias.edit', $noticia->id)}}" class="btn btn-primary"><i class="fas fa-edit"></i> </a>
-                <button class="btn btn-danger"> <i class="fas fa-times"></i> </button>
-                </form>
+                <a href="javascript:;" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" type="button" onclick="deleteData({{$noticia->id}})"> <i class="fas fa-times"></i> </a>
                 </td>
                 </tr>
                 @endforeach
@@ -64,9 +64,53 @@
     </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+  <form action="post" id="deleteForm" method="post">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar noticia</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+                @csrf
+                @method('DELETE')
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" onclick="formSubmit()">muy seguro</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
 @endsection 
 
 @section('scripts')
+<script>$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+})</script>
+
+<script type="text/javascript">
+     function deleteData(id)
+     {
+         var id = id;
+         var url = '{{ route("noticias.destroy", ":id") }}';
+         url = url.replace(':id', id);
+         $("#deleteForm").attr('action', url);
+     }
+
+     function formSubmit()
+     {
+         $("#deleteForm").submit();
+     }
+  </script>
 @endsection
 
 @section('estilos')
