@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Usuarios;
+use App\Usuario;
 
 class UsuarioController extends Controller
 {
@@ -45,16 +45,16 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $users = new Usuarios();
-        $users->titulo = $request->input('txtTitulo');
-        $noticia->cuerpo = $request->input('txtCuerpo');
-        if($noticia->save())
+        $users = new Usuario();
+        $users->titulo = $request->input('txtNombre');
+        $users->cuerpo = $request->input('txtApellido');
+        if($users->save())
         {
             //Si pude guardar la noticia
-            return redirect()->route('noticias.index')->with('exito', 'La noticia fue guardada correctamente');
+            return redirect()->route('usuarios.index')->with('exito', 'La noticia fue guardada correctamente');
         }
         //Aqui no se pudo guardar
-        return redirect()->route('noticias.index')->with('error', 'La noticia no se pudo guardar prro');
+        return redirect()->route('usuarios.index')->with('error', 'La noticia no se pudo guardar prro');
     }
 
     /**
@@ -66,14 +66,14 @@ class UsuarioController extends Controller
     public function show($id)
     {
         {
-            $noticia = Noticia::find($id);
-            if ($noticia){
+            $users = usuario::find($id);
+            if ($users){
             $argumentos = array();
-            $argumentos['noticia'] = $noticia;
-            return view('admin.noticias.show', 
+            $argumentos['usuarios'] = $users;
+            return view('admin.usuarios.show', 
                 $argumentos);
             }
-            return redirect()->route('noticias.index')->with('error', 'Esa noticia no existe');
+            return redirect()->route('usuarios.index')->with('error', 'Esa noticia no existe');
         }
     }
 
@@ -85,14 +85,14 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        $noticia = Noticia::find($id);
-        if ($noticia){
+        $users = Noticia::find($id);
+        if ($users){
         $argumentos = array();
-        $argumentos['noticia'] = $noticia;
-        return view('admin.noticias.edit', 
+        $argumentos['usuarios'] = $users;
+        return view('admin.usuarios.edit', 
             $argumentos);
         }
-        return redirect()->route('noticias.index')->with('error', 'Esa noticia no existe');
+        return redirect()->route('usuarios.index')->with('error', 'Esa noticia no existe');
     }
 
     /**
@@ -104,21 +104,21 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $noticia = Noticia::find($id);
-        if ($noticia)
+        $users = Usuario::find($id);
+        if ($users)
         {
-            $noticia->titulo =
-                $request->input('txtTitulo');
-            $noticia->cuerpo = 
-                $request->input('txtCuerpo');
+            $users->titulo =
+                $request->input('txtNombre');
+            $users->cuerpo = 
+                $request->input('txtApellido');
 
-            if($noticia->save())
+            if($users->save())
             {
-                return redirect()->route('noticias.edit',$id) -> with('exito', 'actualización completada');
+                return redirect()->route('Usuarios.edit',$id) -> with('exito', 'actualización completada');
             }
-            return redirect()->route('noticias.edit',$id)->with('error', 'Hubo una falla en la actualización');
+            return redirect()->route('Usuarios.edit',$id)->with('error', 'Hubo una falla en la actualización');
         }
-        return redirect()->route('noticias.index')->with('error', 'No se encontro la noticia');
+        return redirect()->route('Usuarios.index')->with('error', 'No se encontro la noticia');
     }
 
     /**
@@ -130,15 +130,15 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         
-        $noticia = Noticia::find($id);
-        if($noticia)
+        $users = Usuario::find($id);
+        if($users)
         {
-            if($noticia->delete())
+            if($users->delete())
             {
-                return redirect()->route('noticias.index')->with('exito', 'noticia eliminada');
+                return redirect()->route('Usuarios.index')->with('exito', 'noticia eliminada');
             }
-            return redirect()->route('noticias.index')->with('error', 'No se pudo eliminar la noticia');
+            return redirect()->route('Usuarios.index')->with('error', 'No se pudo eliminar la noticia');
         }
-        return redirect()->route('noticias.index')->with('error', 'Noticia no encontrada');
+        return redirect()->route('Usuarios.index')->with('error', 'Noticia no encontrada');
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('titulo', 'Administracion | Título')
-@section('titulo2', 'Administracion | Liasta de Usuarios')
+@section('titulo2', 'Administracion | Lista de Usuarios')
 
 @section('breadcrumbs')
 @endsection
@@ -43,17 +43,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!--Aqui van las noticias prro --> 
-                @foreach($users as $usuarios)
+                <!--Aqui van los usuarios prro --> 
+                @foreach($usuarios as $usuario)
                 <tr>
-                <td>{{$usuarios->Nombre}}</td>
+                <td>{{$usuario->Nombre}}</td>
                 <td>
                 
                
               
                 <a href="" class="btn btn-primary"><i class="fas fa-eye"></i> </a>
                 <a href="" class="btn btn-primary"><i class="fas fa-edit"></i> </a>
-                <a href="javascript:;" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" type="button" onclick="deleteData({{$noticia->id}})"> <i class="fas fa-times"></i> </a>
+                <a href="javascript:;" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" 
+                type="button" onclick="deleteData({{$usuario->id}})"> <i class="fas fa-times"></i> </a>
                 </td>
                 </tr>
                 @endforeach
